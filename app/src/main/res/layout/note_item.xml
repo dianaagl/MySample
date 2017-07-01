@@ -2,15 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-       <android.support.v7.widget.AppCompatTextView
+              android:layout_height="160dp"
+                android:background="@color/colorAccent"
+                android:layout_margin="16dp"
+                >
+      <android.support.v7.widget.AppCompatTextView
+               android:padding="@dimen/padding"
                android:id="@+id/text"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"/>
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+
+       android:text="texxt"/>
         <android.support.v7.widget.AppCompatTextView
+
+                android:background="@color/colorPrimaryDark"
+                android:textAlignment="center"
                 android:id="@+id/date"
-                android:layout_alignBottom="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+        android:text="date"/>
 </RelativeLayout>

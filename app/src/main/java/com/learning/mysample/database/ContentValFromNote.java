@@ -3,6 +3,7 @@ package com.learning.mysample.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.provider.BaseColumns;
+import android.util.Log;
 import com.learning.mysample.Note;
 
 /**
@@ -14,20 +15,33 @@ public class ContentValFromNote {
         contentValues.put(NotesDbContract.DATE, note.getmDate());
         contentValues.put(NotesDbContract.NOTE_COLOR, note.getmNoteColor());
         contentValues.put(NotesDbContract.TEXT, note.getmNoteText());
-        contentValues.put(NotesDbContract._ID, 0);
+
         return contentValues;
     }
-
     public static Note createNoteFromCursor(Cursor noteCursor){
+        Log.e("TAG",getLong(NotesDbContract._ID, noteCursor) + " = id");
+        Note note = new Note(getLong(NotesDbContract._ID, noteCursor),
+                getString(NotesDbContract.TEXT,noteCursor),
+                getLong(NotesDbContract.DATE,noteCursor),
+                getString(NotesDbContract.NOTE_COLOR,noteCursor));
+
+
+        return note;
+    }
+
+    public static Note createNoteFromCursor(Cursor noteCursor,long id){
+//        Log.e("TAG",getLong(NotesDbContract._ID, noteCursor) + " = id");
         Note note = new Note(getLong(NotesDbContract._ID,noteCursor),
                 getString(NotesDbContract.TEXT,noteCursor),
                 getLong(NotesDbContract.DATE,noteCursor),
                 getString(NotesDbContract.NOTE_COLOR,noteCursor));
 
-      return null;
+
+      return note;
     }
 
     public static long getLong(String columnName,Cursor cursor){
+        Log.e("TAG",columnName);
         return cursor.getLong(cursor.getColumnIndex(columnName));
 
     }

@@ -6,16 +6,41 @@ package com.learning.mysample;
 public class Note {
     private long mId;
     private String mNoteText;
-    private double mDate;
+    private long mDate;
     private String mNoteColor;
 
-    public Note(long mId, String mNoteText, double mDate, String mNoteColor) {
+    public Note(long mId, String mNoteText, long mDate, String mNoteColor) {
         this.mId = mId;
         this.mNoteText = mNoteText;
         this.mDate = mDate;
         this.mNoteColor = mNoteColor;
     }
 
+    @Override
+    public String toString() {
+        return "Note{" +
+                "mId=" + mId +
+                ", mNoteText='" + mNoteText + '\'' +
+                ", mDate=" + mDate +
+                ", mNoteColor='" + mNoteColor + '\'' +
+                '}';
+    }
+
+    public void setmId(long mId) {
+        this.mId = mId;
+    }
+
+    public void setmNoteText(String mNoteText) {
+        this.mNoteText = mNoteText;
+    }
+
+    public void setmDate(long mDate) {
+        this.mDate = mDate;
+    }
+
+    public void setmNoteColor(String mNoteColor) {
+        this.mNoteColor = mNoteColor;
+    }
 
     public long getmId() {
         return mId;
@@ -25,7 +50,7 @@ public class Note {
         return mNoteText;
     }
 
-    public double getmDate() {
+    public long getmDate() {
         return mDate;
     }
 

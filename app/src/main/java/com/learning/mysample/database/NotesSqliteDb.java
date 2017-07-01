@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import com.learning.mysample.Note;
 
 import java.util.ArrayList;
@@ -17,21 +18,28 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
 
 
     public static final int VERSION = 1;
+    public static final String TAG = "Bd";
 
     public NotesSqliteDb(Context context) {
+
         super(context, null,null, VERSION);
+        Log.e(TAG,"NoteSqliteDB");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createDbSql = "CREATE TABLE " +
-                NotesDbContract.TABLE_NAME +  "(" +
-                NotesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                NotesDbContract.DATE + " INTEGER NOT NULL, "+
-                NotesDbContract.TEXT + " TEXT, "+
-                NotesDbContract.NOTE_COLOR + " TEXT NOT NULL " +
-                ");";
-        db.execSQL(createDbSql);
+
+            String createDbSql = "CREATE TABLE " +
+                    NotesDbContract.TABLE_NAME + "(" +
+                    NotesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                    NotesDbContract.DATE + " INTEGER NOT NULL, " +
+                    NotesDbContract.TEXT + " TEXT, " +
+                    NotesDbContract.NOTE_COLOR + " TEXT NOT NULL " +
+                    ");";
+            db.execSQL(createDbSql);
+           Log.e(TAG,"onCreate "+createDbSql);
+
+
     }
 
     @Override
@@ -55,6 +63,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
                     null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
+                Log.e(TAG,ContentValFromNote.createNoteFromCursor(cursor).toString());
                 noteList.add(ContentValFromNote.createNoteFromCursor(cursor));
                 cursor.moveToNext();
             }
@@ -63,7 +72,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         finally {
             if(cursor != null) cursor.close();
             database.endTransaction();
-            database.close();
+
         }
         return noteList;
     }
@@ -79,8 +88,9 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         }
         finally {
             database.endTransaction();
-            database.close();
+
         }
+        Log.e(TAG,"id = "+ insertedId);
         return insertedId;
     }
 
@@ -100,30 +110,34 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         }
         finally {
             database.endTransaction();
-            database.close();
+
         }
         return updated;
     }
 
     protected Note getNoteById(long id){
-        SQLiteDatabase database = getWritableDatabase();
+        SQLiteDatabase database = getReadableDatabase();
         database.beginTransaction();
         Note note = null;
         Cursor cursor = null;
         try{
             cursor = database.query(NotesDbContract.TABLE_NAME,
-                    null,
+                    new String[]{NotesDbContract._ID,NotesDbContract.TEXT,NotesDbContract.DATE,NotesDbContract.NOTE_COLOR},
                     NotesDbContract._ID + " = ?",
                     new String[]{String.valueOf(id)},
                     null,
                     null,
                     null);
+            Log.e(TAG,"getNodeById id= "+ id);
+            cursor.moveToFirst();
+
             note = ContentValFromNote.createNoteFromCursor(cursor);
+            //Log.e(TAG, "not = " + note);
             database.setTransactionSuccessful();
         }
         finally {
             database.endTransaction();
-            database.close();
+
             if(cursor != null){
                 cursor.close();
             }
