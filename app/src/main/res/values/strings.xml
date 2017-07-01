@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MySample</string>
+    <string name="button_broadcast">sendBroadCastReceiver()</string>
+    <string name="button_service">startService</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+</resources>
