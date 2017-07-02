@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -48,7 +47,7 @@ public class NewActivity extends AppCompatActivity {
                 Intent intent = new Intent(NewActivity.this, EditNoteActivity.class);
                 intent.putExtra(NotesDbContract.TEXT,note.getmNoteText());
                 intent.putExtra(NotesDbContract.DATE,note.getmDate());
-                intent.putExtra(NotesDbContract.NOTE_COLOR,note.getmNoteColor());
+                intent.putExtra(NotesDbContract.NOTE_COLOR,note.getmNoteTheme());
                 intent.putExtra(NotesDbContract._ID, note.getmId());
                 startActivity(intent);
 

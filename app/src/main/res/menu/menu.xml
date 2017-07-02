@@ -4,5 +4,17 @@
             android:title="Сохранить"
           android:id="@+id/save_note"
             app:showAsAction="always"/>
+<item android:title="Удалить"
+      android:icon="@drawable/ic_clear_black_24dp"
+      android:id="@+id/remove_note"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/choose_color"
+            android:icon="@drawable/ic_format_color_fill_black_24dp"
+            android:title="@string/choose_color"
+            app:showAsAction="always">
+
+    </item>
 
 </menu>

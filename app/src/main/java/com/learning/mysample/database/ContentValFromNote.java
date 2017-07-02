@@ -2,7 +2,6 @@ package com.learning.mysample.database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.provider.BaseColumns;
 import android.util.Log;
 import com.learning.mysample.Note;
 
@@ -13,7 +12,7 @@ public class ContentValFromNote {
     public static ContentValues createContentValuesFromNote(Note note){
         ContentValues contentValues = new ContentValues();
         contentValues.put(NotesDbContract.DATE, note.getmDate());
-        contentValues.put(NotesDbContract.NOTE_COLOR, note.getmNoteColor());
+        contentValues.put(NotesDbContract.NOTE_COLOR, note.getmNoteTheme());
         contentValues.put(NotesDbContract.TEXT, note.getmNoteText());
 
         return contentValues;
@@ -23,7 +22,7 @@ public class ContentValFromNote {
         Note note = new Note(getLong(NotesDbContract._ID, noteCursor),
                 getString(NotesDbContract.TEXT,noteCursor),
                 getLong(NotesDbContract.DATE,noteCursor),
-                getString(NotesDbContract.NOTE_COLOR,noteCursor));
+                getInt(NotesDbContract.NOTE_COLOR,noteCursor));
 
 
         return note;
@@ -34,7 +33,7 @@ public class ContentValFromNote {
         Note note = new Note(getLong(NotesDbContract._ID,noteCursor),
                 getString(NotesDbContract.TEXT,noteCursor),
                 getLong(NotesDbContract.DATE,noteCursor),
-                getString(NotesDbContract.NOTE_COLOR,noteCursor));
+                getInt(NotesDbContract.NOTE_COLOR,noteCursor));
 
 
       return note;
@@ -47,5 +46,8 @@ public class ContentValFromNote {
     }
     public static String getString(String columnName,Cursor cursor){
         return cursor.getString(cursor.getColumnIndex(columnName));
+    }
+    public static int getInt(String columnName,Cursor cursor){
+        return cursor.getInt(cursor.getColumnIndex(columnName));
     }
 }

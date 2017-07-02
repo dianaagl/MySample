@@ -7,13 +7,13 @@ public class Note {
     private long mId;
     private String mNoteText;
     private long mDate;
-    private String mNoteColor;
+    private int mNoteTheme;
 
-    public Note(long mId, String mNoteText, long mDate, String mNoteColor) {
+    public Note(long mId, String mNoteText, long mDate, int mNoteTheme) {
         this.mId = mId;
         this.mNoteText = mNoteText;
         this.mDate = mDate;
-        this.mNoteColor = mNoteColor;
+        this.mNoteTheme = mNoteTheme;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class Note {
                 "mId=" + mId +
                 ", mNoteText='" + mNoteText + '\'' +
                 ", mDate=" + mDate +
-                ", mNoteColor='" + mNoteColor + '\'' +
+                ", mNoteTheme='" + mNoteTheme + '\'' +
                 '}';
     }
 
@@ -38,8 +38,8 @@ public class Note {
         this.mDate = mDate;
     }
 
-    public void setmNoteColor(String mNoteColor) {
-        this.mNoteColor = mNoteColor;
+    public void setmNoteTheme(int mNoteTheme) {
+        this.mNoteTheme = mNoteTheme;
     }
 
     public long getmId() {
@@ -54,8 +54,8 @@ public class Note {
         return mDate;
     }
 
-    public String getmNoteColor() {
-        return mNoteColor;
+    public int getmNoteTheme() {
+        return mNoteTheme;
     }
 
     @Override
@@ -66,21 +66,17 @@ public class Note {
         Note note = (Note) o;
 
         if (mId != note.mId) return false;
-        if (Double.compare(note.mDate, mDate) != 0) return false;
-        if (!mNoteText.equals(note.mNoteText)) return false;
-        return mNoteColor.equals(note.mNoteColor);
+        if (mDate != note.mDate) return false;
+        if (mNoteTheme != note.mNoteTheme) return false;
+        return mNoteText != null ? mNoteText.equals(note.mNoteText) : note.mNoteText == null;
     }
+
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = (int) (mId ^ (mId >>> 32));
+        int result = (int) (mId ^ (mId >>> 32));
         result = 31 * result + (mNoteText != null ? mNoteText.hashCode() : 0);
-        temp = Double.doubleToLongBits(mDate);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (mNoteColor != null ? mNoteColor.hashCode() : 0);
+        result = 31 * result + (int) (mDate ^ (mDate >>> 32));
+        result = 31 * result + mNoteTheme;
         return result;
     }
-
-
 }

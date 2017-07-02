@@ -7,5 +7,60 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="NewTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="backgroundTint">?android:attr/colorPrimary</item>
+        <item name="background">?android:attr/colorPrimary</item>
+        <item name="android:windowBackground">?attr/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/green</item>
+        <item name="android:src">@drawable/ic_border_color_white_24dp</item>
 
+
+    </style>
+    <style name="white_theme" parent="NewTheme">
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="android:textAppearance">@style/BlackTextApperance</item>
+    </style>
+    <style name="orange_theme" parent="NewTheme">
+
+        <item name="colorPrimary">@color/orange</item>
+        <item name="android:textAppearance">@style/WhiteTextApperance</item>
+    </style>
+    <style name="lime_theme" parent="NewTheme">
+
+
+        <item name="colorPrimary">@color/lime</item>
+        <item name="android:textAppearance">@style/WhiteTextApperance</item>
+
+    </style>
+    <style name="green_theme" parent="NewTheme">
+
+        <item name="colorPrimary">@color/green</item>
+        <item name="android:textAppearance">@style/WhiteTextApperance</item>
+
+    </style>
+    <style name="blue_theme" parent="NewTheme">
+
+        <item name="colorPrimary">@color/blue</item>
+        <item name="android:textAppearance">@style/WhiteTextApperance</item>
+
+    </style>
+    <style name="purple_theme" parent="NewTheme">
+        <item name="android:textAppearance">@style/WhiteTextApperance</item>
+        <item name="backgroundTint">@color/purple</item>
+    </style>
+    <style name="pink_theme" parent="NewTheme">
+
+        <item name="colorPrimary">@color/pink</item>
+        <item name="android:textAppearance">@style/WhiteTextApperance</item>
+        <item name="backgroundTint">@color/pink</item>
+    </style>
+    <style name="BlackTextApperance" parent="TextAppearance.AppCompat">
+
+        <item name="android:textColor">@color/black_textColor</item>
+    </style>
+    <style name="WhiteTextApperance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white_textColor</item>
+    </style>
 </resources>

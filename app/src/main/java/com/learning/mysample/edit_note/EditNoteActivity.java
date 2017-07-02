@@ -33,7 +33,7 @@ public class EditNoteActivity extends AppCompatActivity {
                 intent.getLongExtra(NotesDbContract._ID,-1),
                 intent.getStringExtra(NotesDbContract.TEXT),
                 intent.getLongExtra(NotesDbContract.DATE,0),
-                intent.getStringExtra(NotesDbContract.NOTE_COLOR));
+                intent.getIntExtra(NotesDbContract.NOTE_COLOR,R.style.blue_theme));
         mEditText = (AppCompatEditText) findViewById(R.id.edit_text_note);
         mEditText.setText(mCacheNote.getmNoteText());
     }
@@ -52,6 +52,12 @@ public class EditNoteActivity extends AppCompatActivity {
                 mCacheNote.setmNoteText(mEditText.getText().toString());
                 mCacheNote.setmDate(System.currentTimeMillis());
                 ((NotesApp)getApplication()).getmNotesStorage().updateNote(
+                        mCacheNote
+                );
+                finish();
+                return true;
+            case R.id.remove_note:
+                ((NotesApp)getApplication()).getmNotesStorage().deleteNote(
                         mCacheNote
                 );
                 finish();

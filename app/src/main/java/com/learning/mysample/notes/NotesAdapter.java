@@ -3,6 +3,7 @@ package com.learning.mysample.notes;
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,14 +53,19 @@ public class NotesAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
+        Note note = notes.get(position);
         if(view == null){
-            view = LayoutInflater.from(parent.getContext()).
+            Context themedContext = new ContextThemeWrapper(parent.getContext(), note.getmNoteTheme());
+
+            view = LayoutInflater.from(themedContext).
                     inflate(R.layout.note_item, parent,false);
+
             view.setTag(new NoteHolder(view));
         }
 
         NoteHolder noteHolder = (NoteHolder) view.getTag();
-        noteHolder.setNote(notes.get(position));
+        noteHolder.setNote(note);
+
         Log.e(TAG,notes.get(position).toString());
         return view;
     }

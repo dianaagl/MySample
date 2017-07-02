@@ -48,6 +48,18 @@ public class NotesStorage {
         }
         return isUpdated;
     }
+    public boolean deleteNote(Note note){
+        int deletedNotes = notesDb.removeNote(note);
+        boolean isDeleted = false;
+        if(deletedNotes == 1) {
+
+            isDeleted = true;
+            for (IcontentChangeListener listener : mListenerList) {
+                listener.changed(this, note);
+            }
+        }
+        return isDeleted;
+    }
     public Note getNoteById(long id){
         return notesDb.getNoteById(id);
     }

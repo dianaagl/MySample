@@ -34,7 +34,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
                     NotesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
                     NotesDbContract.DATE + " INTEGER NOT NULL, " +
                     NotesDbContract.TEXT + " TEXT, " +
-                    NotesDbContract.NOTE_COLOR + " TEXT NOT NULL " +
+                    NotesDbContract.NOTE_COLOR + " INTEGER NOT NULL " +
                     ");";
             db.execSQL(createDbSql);
            Log.e(TAG,"onCreate "+createDbSql);
@@ -114,7 +114,21 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         }
         return updated;
     }
-
+    protected int removeNote(Note note){
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+        int deletedNotes = 0;
+        try {
+            deletedNotes = db.delete(NotesDbContract.TABLE_NAME,
+                    NotesDbContract._ID + " = ? ",
+                    new String[]{String.valueOf(note.getmId())});
+            db.setTransactionSuccessful();
+        }
+        finally {
+            db.endTransaction();
+        }
+        return deletedNotes;
+    }
     protected Note getNoteById(long id){
         SQLiteDatabase database = getReadableDatabase();
         database.beginTransaction();
