@@ -11,29 +11,29 @@ import com.learning.mysample.Note;
 public class ContentValFromNote {
     public static ContentValues createContentValuesFromNote(Note note){
         ContentValues contentValues = new ContentValues();
-        contentValues.put(NotesDbContract.DATE, note.getmDate());
-        contentValues.put(NotesDbContract.NOTE_COLOR, note.getmNoteTheme());
-        contentValues.put(NotesDbContract.TEXT, note.getmNoteText());
+        contentValues.put(Contract.NotesDbContract.DATE, note.getmDate());
+        contentValues.put(Contract.NotesDbContract.NOTE_COLOR, note.getmNoteTheme());
+        contentValues.put(Contract.NotesDbContract.TEXT, note.getmNoteText());
 
         return contentValues;
     }
     public static Note createNoteFromCursor(Cursor noteCursor){
-        Log.e("TAG",getLong(NotesDbContract._ID, noteCursor) + " = id");
-        Note note = new Note(getLong(NotesDbContract._ID, noteCursor),
-                getString(NotesDbContract.TEXT,noteCursor),
-                getLong(NotesDbContract.DATE,noteCursor),
-                getInt(NotesDbContract.NOTE_COLOR,noteCursor));
+        Log.e("TAG",getLong(Contract.NotesDbContract._ID, noteCursor) + " = id");
+        Note note = new Note(getLong(Contract.NotesDbContract._ID, noteCursor),
+                getString(Contract.NotesDbContract.TEXT,noteCursor),
+                getLong(Contract.NotesDbContract.DATE,noteCursor),
+                getInt(Contract.NotesDbContract.NOTE_COLOR,noteCursor));
 
 
         return note;
     }
 
     public static Note createNoteFromCursor(Cursor noteCursor,long id){
-//        Log.e("TAG",getLong(NotesDbContract._ID, noteCursor) + " = id");
-        Note note = new Note(getLong(NotesDbContract._ID,noteCursor),
-                getString(NotesDbContract.TEXT,noteCursor),
-                getLong(NotesDbContract.DATE,noteCursor),
-                getInt(NotesDbContract.NOTE_COLOR,noteCursor));
+//        Log.e("TAG",getLong(Contract.NotesDbContract._ID, noteCursor) + " = id");
+        Note note = new Note(getLong(Contract.NotesDbContract._ID,noteCursor),
+                getString(Contract.NotesDbContract.TEXT,noteCursor),
+                getLong(Contract.NotesDbContract.DATE,noteCursor),
+                getInt(Contract.NotesDbContract.NOTE_COLOR,noteCursor));
 
 
       return note;

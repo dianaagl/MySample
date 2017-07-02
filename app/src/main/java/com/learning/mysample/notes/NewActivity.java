@@ -12,7 +12,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import com.learning.mysample.*;
 import com.learning.mysample.add_note.CreateNoteActivity;
-import com.learning.mysample.database.NotesDbContract;
+import com.learning.mysample.database.Contract;
+import com.learning.mysample.database.Contract.NotesDbContract;
 import com.learning.mysample.edit_note.EditNoteActivity;
 
 import java.util.List;
@@ -45,10 +46,10 @@ public class NewActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Note note = NotesApp.getmNotesStorage().getNoteById(id);
                 Intent intent = new Intent(NewActivity.this, EditNoteActivity.class);
-                intent.putExtra(NotesDbContract.TEXT,note.getmNoteText());
-                intent.putExtra(NotesDbContract.DATE,note.getmDate());
-                intent.putExtra(NotesDbContract.NOTE_COLOR,note.getmNoteTheme());
-                intent.putExtra(NotesDbContract._ID, note.getmId());
+                intent.putExtra(Contract.NotesDbContract.TEXT,note.getmNoteText());
+                intent.putExtra(Contract.NotesDbContract.DATE,note.getmDate());
+                intent.putExtra(Contract.NotesDbContract.NOTE_COLOR,note.getmNoteTheme());
+                intent.putExtra(Contract.NotesDbContract._ID, note.getmId());
                 startActivity(intent);
 
                 Log.e(TAG,"id = " + id);

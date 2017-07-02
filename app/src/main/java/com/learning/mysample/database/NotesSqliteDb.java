@@ -19,10 +19,11 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
 
     public static final int VERSION = 1;
     public static final String TAG = "Bd";
+    public static final String NAME = "notes.db";
 
     public NotesSqliteDb(Context context) {
 
-        super(context, null,null, VERSION);
+        super(context, NAME,null, VERSION);
         Log.e(TAG,"NoteSqliteDB");
     }
 
@@ -30,11 +31,11 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
 
             String createDbSql = "CREATE TABLE " +
-                    NotesDbContract.TABLE_NAME + "(" +
-                    NotesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
-                    NotesDbContract.DATE + " INTEGER NOT NULL, " +
-                    NotesDbContract.TEXT + " TEXT, " +
-                    NotesDbContract.NOTE_COLOR + " INTEGER NOT NULL " +
+                    Contract.NotesDbContract.TABLE_NAME + "(" +
+                    Contract.NotesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
+                    Contract.NotesDbContract.DATE + " INTEGER NOT NULL, " +
+                    Contract.NotesDbContract.TEXT + " TEXT, " +
+                    Contract.NotesDbContract.NOTE_COLOR + " INTEGER NOT NULL " +
                     ");";
             db.execSQL(createDbSql);
            Log.e(TAG,"onCreate "+createDbSql);
@@ -46,7 +47,30 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
+    protected Note getLastNote(){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        Note note = null;
+        try {
+            cursor = db.query (Contract.NotesDbContract.TABLE_NAME,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                   Contract.NotesDbContract.DATE) ;
+            cursor.moveToLast();
+            note = ContentValFromNote.createNoteFromCursor(cursor);
+            db.setTransactionSuccessful();
+        }
+        finally {
+            db.endTransaction();
+            if(cursor != null){
+                cursor.close();
+            }
+        }
+        return note;
+    }
     protected List<Note> getNotes(){
         SQLiteDatabase database = getReadableDatabase();
         Cursor cursor = null;
@@ -54,7 +78,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         database.beginTransaction();
         try{
             cursor = database.query(
-                    NotesDbContract.TABLE_NAME,
+                    Contract.NotesDbContract.TABLE_NAME,
                     null,
                     null,
                     null,
@@ -83,7 +107,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         try {
             ContentValues contentValues = ContentValFromNote.createContentValuesFromNote(note);
 
-            insertedId = database.insert(NotesDbContract.TABLE_NAME, null, contentValues);
+            insertedId = database.insert(Contract.NotesDbContract.TABLE_NAME, null, contentValues);
             database.setTransactionSuccessful();
         }
         finally {
@@ -101,9 +125,9 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         try {
             ContentValues contentValues = ContentValFromNote.createContentValuesFromNote(note);
 
-            updated = database.update(NotesDbContract.TABLE_NAME,
+            updated = database.update(Contract.NotesDbContract.TABLE_NAME,
                     contentValues,
-                    NotesDbContract._ID +" = ? ",
+                    Contract.NotesDbContract._ID +" = ? ",
                     new String[]{String.valueOf(note.getmId())}
             );
             database.setTransactionSuccessful();
@@ -119,8 +143,8 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         db.beginTransaction();
         int deletedNotes = 0;
         try {
-            deletedNotes = db.delete(NotesDbContract.TABLE_NAME,
-                    NotesDbContract._ID + " = ? ",
+            deletedNotes = db.delete(Contract.NotesDbContract.TABLE_NAME,
+                    Contract.NotesDbContract._ID + " = ? ",
                     new String[]{String.valueOf(note.getmId())});
             db.setTransactionSuccessful();
         }
@@ -135,9 +159,9 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         Note note = null;
         Cursor cursor = null;
         try{
-            cursor = database.query(NotesDbContract.TABLE_NAME,
-                    new String[]{NotesDbContract._ID,NotesDbContract.TEXT,NotesDbContract.DATE,NotesDbContract.NOTE_COLOR},
-                    NotesDbContract._ID + " = ?",
+            cursor = database.query(Contract.NotesDbContract.TABLE_NAME,
+                    new String[]{Contract.NotesDbContract._ID,Contract.NotesDbContract.TEXT,Contract.NotesDbContract.DATE,Contract.NotesDbContract.NOTE_COLOR},
+                    Contract.NotesDbContract._ID + " = ?",
                     new String[]{String.valueOf(id)},
                     null,
                     null,

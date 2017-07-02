@@ -61,7 +61,12 @@ public class NotesStorage {
         return isDeleted;
     }
     public Note getNoteById(long id){
+
         return notesDb.getNoteById(id);
+    }
+    public Note getLastNote(){
+
+        return notesDb.getLastNote();
     }
     public void addListener(IcontentChangeListener listener){
         Log.e(TAG,"addlistener");

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="160dp"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
                 android:layout_margin="16dp"
 
-                android:theme="@style/NewTheme">
+                >
 
-      <android.support.v7.widget.AppCompatTextView
+    <android.support.v7.widget.AppCompatTextView
 
-              android:padding="@dimen/padding"
-              android:id="@+id/text"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
+            android:padding="@dimen/padding"
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
+            android:text="texxt"
+            android:backgroundTint="?attr/colorPrimary" android:background="?attr/colorPrimary"/>
+    <android.support.v7.widget.AppCompatTextView
 
-              android:text="texxt"
-              />
-        <android.support.v7.widget.AppCompatTextView
+            android:textAlignment="center"
+            android:id="@+id/date"
+            android:textAppearance="@style/WhiteTextApperance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
 
-                android:background="?attr/colorPrimaryDark"
-                android:textAlignment="center"
-                android:id="@+id/date"
-                android:layout_alignParentBottom="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-        android:text="date"/>
+            android:text="date" android:layout_alignParentBottom="true"
+            android:backgroundTint="?attr/colorPrimaryDark"
+            android:background="?attr/colorPrimaryDark"/>
 
 </RelativeLayout>

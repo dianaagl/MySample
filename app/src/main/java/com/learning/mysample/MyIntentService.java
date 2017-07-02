@@ -48,5 +48,8 @@ public class MyIntentService extends IntentService {
         }
     }
 
-
+    @Override
+    public void onStart(Intent intent, int startId) {
+        super.onStart(intent, startId);
+    }
 }

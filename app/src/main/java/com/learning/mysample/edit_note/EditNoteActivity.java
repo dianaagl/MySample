@@ -12,7 +12,8 @@ import android.view.MenuItem;
 import com.learning.mysample.Note;
 import com.learning.mysample.NotesApp;
 import com.learning.mysample.R;
-import com.learning.mysample.database.NotesDbContract;
+import com.learning.mysample.database.Contract;
+import com.learning.mysample.database.Contract.NotesDbContract;
 
 /**
  * Created by Диана on 01.07.2017.
@@ -30,10 +31,10 @@ public class EditNoteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         mCacheNote = new Note(
-                intent.getLongExtra(NotesDbContract._ID,-1),
-                intent.getStringExtra(NotesDbContract.TEXT),
-                intent.getLongExtra(NotesDbContract.DATE,0),
-                intent.getIntExtra(NotesDbContract.NOTE_COLOR,R.style.blue_theme));
+                intent.getLongExtra(Contract.NotesDbContract._ID,-1),
+                intent.getStringExtra(Contract.NotesDbContract.TEXT),
+                intent.getLongExtra(Contract.NotesDbContract.DATE,0),
+                intent.getIntExtra(Contract.NotesDbContract.NOTE_COLOR,R.style.NewTheme_blue_theme));
         mEditText = (AppCompatEditText) findViewById(R.id.edit_text_note);
         mEditText.setText(mCacheNote.getmNoteText());
     }
