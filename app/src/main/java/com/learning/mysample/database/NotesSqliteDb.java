@@ -20,6 +20,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
     public static final int VERSION = 1;
     public static final String TAG = "Bd";
     public static final String NAME = "notes.db";
+    public static final int NO_ID = -1;
 
     public NotesSqliteDb(Context context) {
 
@@ -49,6 +50,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
     }
     protected Note getLastNote(){
         SQLiteDatabase db = getReadableDatabase();
+        db.beginTransaction();
         Cursor cursor = null;
         Note note = null;
         try {
@@ -60,7 +62,9 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
                     null,
                    Contract.NotesDbContract.DATE) ;
             cursor.moveToLast();
-            note = ContentValFromNote.createNoteFromCursor(cursor);
+            if(!cursor.isAfterLast()) {
+                note = ContentValFromNote.createNoteFromCursor(cursor);
+            }
             db.setTransactionSuccessful();
         }
         finally {
@@ -103,7 +107,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
     protected long insertNote(Note note){
         SQLiteDatabase database = getWritableDatabase();
         database.beginTransaction();
-        long insertedId = -1;
+        long insertedId = NO_ID;
         try {
             ContentValues contentValues = ContentValFromNote.createContentValuesFromNote(note);
 

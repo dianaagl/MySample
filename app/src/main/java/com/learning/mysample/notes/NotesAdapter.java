@@ -66,7 +66,6 @@ public class NotesAdapter extends BaseAdapter{
         NoteHolder noteHolder = (NoteHolder) view.getTag();
         noteHolder.setNote(note);
 
-        Log.e(TAG,notes.get(position).toString());
         return view;
     }
     public class NoteHolder{

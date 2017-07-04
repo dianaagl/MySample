@@ -18,7 +18,6 @@ public class ContentValFromNote {
         return contentValues;
     }
     public static Note createNoteFromCursor(Cursor noteCursor){
-        Log.e("TAG",getLong(Contract.NotesDbContract._ID, noteCursor) + " = id");
         Note note = new Note(getLong(Contract.NotesDbContract._ID, noteCursor),
                 getString(Contract.NotesDbContract.TEXT,noteCursor),
                 getLong(Contract.NotesDbContract.DATE,noteCursor),
@@ -34,13 +33,10 @@ public class ContentValFromNote {
                 getString(Contract.NotesDbContract.TEXT,noteCursor),
                 getLong(Contract.NotesDbContract.DATE,noteCursor),
                 getInt(Contract.NotesDbContract.NOTE_COLOR,noteCursor));
-
-
       return note;
     }
 
     public static long getLong(String columnName,Cursor cursor){
-        Log.e("TAG",columnName);
         return cursor.getLong(cursor.getColumnIndex(columnName));
 
     }

@@ -13,7 +13,6 @@ import android.widget.GridView;
 import com.learning.mysample.*;
 import com.learning.mysample.add_note.CreateNoteActivity;
 import com.learning.mysample.database.Contract;
-import com.learning.mysample.database.Contract.NotesDbContract;
 import com.learning.mysample.edit_note.EditNoteActivity;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 /**
  * Created by Диана on 29.06.2017.
  */
-public class NewActivity extends AppCompatActivity {
+public class NotesActivity extends AppCompatActivity {
 
 
     public static final String TAG = "ActivityNotes";
@@ -32,20 +31,21 @@ public class NewActivity extends AppCompatActivity {
         setContentView(R.layout.new_activity_layout);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
+        mGridView = (GridView) findViewById(R.id.notes_grid);
+
         getLoaderManager().initLoader(1,null,new LoaderCallback());
         findViewById(R.id.add_note_but).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NewActivity.this,CreateNoteActivity.class);
+                Intent intent = new Intent(NotesActivity.this,CreateNoteActivity.class);
                 startActivity(intent);
             }
         });
-        mGridView = (GridView) findViewById(R.id.notes_grid);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Note note = NotesApp.getmNotesStorage().getNoteById(id);
-                Intent intent = new Intent(NewActivity.this, EditNoteActivity.class);
+                Intent intent = new Intent(NotesActivity.this, EditNoteActivity.class);
                 intent.putExtra(Contract.NotesDbContract.TEXT,note.getmNoteText());
                 intent.putExtra(Contract.NotesDbContract.DATE,note.getmDate());
                 intent.putExtra(Contract.NotesDbContract.NOTE_COLOR,note.getmNoteTheme());
@@ -64,7 +64,7 @@ public class NewActivity extends AppCompatActivity {
 
         @Override
         public Loader<List<Note>> onCreateLoader(int id, Bundle args) {
-            return new NotesLoader(NewActivity.this, NotesApp.getmNotesStorage());
+            return new NotesLoader(NotesActivity.this, NotesApp.getmNotesStorage());
         }
 
         @Override

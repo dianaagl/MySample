@@ -1,23 +1,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+                xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/widget_margin"
-                android:background="#09C"
-                >
-    <TextView android:text="@string/Notes_app_name"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"/>
+                android:elevation="@dimen/margin"
+               >
     <TextView
-            android:id="@+id/note_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    <TextView
-            android:textAppearance="@style/WhiteTextApperance"
-            android:background="?attr/colorPrimaryDark"
-            android:layout_alignParentBottom="true"
+
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textAlignment="center"
             android:id="@+id/note_date"
             android:layout_width="match_parent"
-              android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="date"
+    />
+    <TextView
+            android:textAlignment="center"
+            android:layout_below="@+id/note_date"
+            android:textAppearance="@style/WhiteSmallTextAppearance.MySample.Widget.TextView"
+            android:paddingTop="@dimen/widget_padding"
+            android:paddingLeft="@dimen/widget_padding"
+            android:paddingRight="@dimen/widget_padding"
+            android:paddingBottom="@dimen/widget_padding"
+            android:background="@color/widget_bg"
+            android:id="@+id/note_text"
+            android:text="some_text"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_height"
 
+    />
 
 </RelativeLayout>

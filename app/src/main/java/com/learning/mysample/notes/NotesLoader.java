@@ -2,8 +2,10 @@ package com.learning.mysample.notes;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import com.learning.mysample.Note;
+import com.learning.mysample.NotesWidget;
 import com.learning.mysample.database.NotesStorage;
 
 import java.util.List;
@@ -51,8 +53,10 @@ public class NotesLoader extends AsyncTaskLoader<List<Note>> implements NotesSto
     @Override
     public void changed(NotesStorage sender, Note note) {
         Log.e(TAG,"onCOntentChanged");
-
+        Intent intent = new Intent(getContext(),NotesWidget.MyService.class);
+        getContext().startService(intent);
         onContentChanged();
+
 
     }
 }

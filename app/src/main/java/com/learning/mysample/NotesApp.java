@@ -12,12 +12,15 @@ public class NotesApp extends Application {
 
     public static final String NOTES_APP = "NotesApp";
     private static NotesStorage mNotesStorage;
+    public static ColorThemes mColorThemes;
 
     @Override
     public void onCreate() {
         super.onCreate();
         NotesSqliteDb sqliteDb = new NotesSqliteDb(this);
         mNotesStorage = new NotesStorage(sqliteDb);
+        mColorThemes = new ColorThemes();
+
         Log.e(NOTES_APP,"onCreate");
     }
 
