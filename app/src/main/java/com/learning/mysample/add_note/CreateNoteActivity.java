@@ -57,16 +57,16 @@ public class CreateNoteActivity extends AppCompatActivity {
         mBottomSheetBehavior = BottomSheetBehavior.from(lBottomSheet);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
-        mTheme = R.style.NewTheme_white_theme;
+        mTheme = R.color.white;
 
 
-        for (final Map.Entry<Integer,Integer[]> entry: NotesApp.mColorThemes.mIdThemeToColorMap.entrySet()) {
+        for (final Map.Entry<Integer,Integer> entry: NotesApp.mColorThemes.mColorMap.entrySet()) {
             findViewById(entry.getKey()).setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onClick(View v) {
-                    mTheme = entry.getValue()[THEME_INDEX];
-                    mLayout.setBackgroundColor(ContextCompat.getColor(CreateNoteActivity.this,entry.getValue()[COLOR_INDEX]));
+                    mTheme = entry.getValue();
+                    mLayout.setBackgroundColor(ContextCompat.getColor(CreateNoteActivity.this,entry.getValue()));
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 
                     if(entry.getKey() == R.id.white_theme){

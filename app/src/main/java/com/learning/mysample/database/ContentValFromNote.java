@@ -28,7 +28,7 @@ public class ContentValFromNote {
     }
 
     public static Note createNoteFromCursor(Cursor noteCursor,long id){
-//        Log.e("TAG",getLong(Contract.NotesDbContract._ID, noteCursor) + " = id");
+//        //Log.e("TAG",getLong(Contract.NotesDbContract._ID, noteCursor) + " = id");
         Note note = new Note(getLong(Contract.NotesDbContract._ID,noteCursor),
                 getString(Contract.NotesDbContract.TEXT,noteCursor),
                 getLong(Contract.NotesDbContract.DATE,noteCursor),

@@ -20,39 +20,39 @@ public class NotesLoader extends AsyncTaskLoader<List<Note>> implements NotesSto
         super(context);
         mNotesStorage = notesStorage;
         mNotesStorage.addListener(this);
-        Log.e(TAG,"NotesLoader");
+        //Log.e(TAG,"NotesLoader");
     }
 
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
         forceLoad();
-        Log.e(TAG,"onStartLoading()");
+        //Log.e(TAG,"onStartLoading()");
 
     }
 
     @Override
     public void deliverResult(List<Note> data) {
-        Log.e(TAG,"deliverResult");
+        //Log.e(TAG,"deliverResult");
         super.deliverResult(data);
     }
 
     @Override
     public List<Note> loadInBackground()
-    {      Log.e(TAG,"loadInBg " + mNotesStorage.getNotes());
+    {      //Log.e(TAG,"loadInBg " + mNotesStorage.getNotes());
         return mNotesStorage.getNotes();
     }
 
     @Override
     protected void onReset() {
-        Log.e(TAG,"reset");
+        //Log.e(TAG,"reset");
         super.onReset();
         mNotesStorage.removeListener(this);
     }
 
     @Override
     public void changed(NotesStorage sender, Note note) {
-        Log.e(TAG,"onCOntentChanged");
+        //Log.e(TAG,"onCOntentChanged");
         Intent intent = new Intent(getContext(),NotesWidget.MyService.class);
         getContext().startService(intent);
         onContentChanged();

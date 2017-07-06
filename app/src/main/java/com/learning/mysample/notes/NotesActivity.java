@@ -24,6 +24,7 @@ public class NotesActivity extends AppCompatActivity {
 
 
     public static final String TAG = "ActivityNotes";
+    public static final int LOADER_ID = 1;
     private GridView mGridView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class NotesActivity extends AppCompatActivity {
 
         mGridView = (GridView) findViewById(R.id.notes_grid);
 
-        getLoaderManager().initLoader(1,null,new LoaderCallback());
+        getLoaderManager().initLoader(LOADER_ID,null,new LoaderCallback());
         findViewById(R.id.add_note_but).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +53,7 @@ public class NotesActivity extends AppCompatActivity {
                 intent.putExtra(Contract.NotesDbContract._ID, note.getmId());
                 startActivity(intent);
 
-                Log.e(TAG,"id = " + id);
+                //////Log.e(TAG,"id = " + id);
 
             }
         });
@@ -69,7 +70,7 @@ public class NotesActivity extends AppCompatActivity {
 
         @Override
         public void onLoadFinished(Loader<List<Note>> loader, List<Note> data) {
-            Log.e(TAG,"onLoadFinished"+ " "+ data);
+            //////Log.e(TAG,"onLoadFinished"+ " "+ data);
             mGridView.setAdapter(new NotesAdapter(data));
         }
 

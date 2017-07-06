@@ -21,7 +21,8 @@ public class NotesApp extends Application {
         mNotesStorage = new NotesStorage(sqliteDb);
         mColorThemes = new ColorThemes();
 
-        Log.e(NOTES_APP,"onCreate");
+
+        //Log.e(NOTES_APP,"onCreate");
     }
 
 

@@ -58,7 +58,10 @@ public class EditNoteActivity extends AppCompatActivity {
                 intent.getStringExtra(Contract.NotesDbContract.TEXT),
                 intent.getLongExtra(Contract.NotesDbContract.DATE,0),
                 intent.getIntExtra(Contract.NotesDbContract.NOTE_COLOR,
-                        R.style.NewTheme_blue_theme));
+                        R.color.white));
+        if(mCacheNote.getmNoteTheme() != R.color.white){
+            mEditText.setTextColor(ContextCompat.getColor(this,R.color.white));
+        }
 
         mEditText.setText(mCacheNote.getmNoteText());
 
@@ -68,18 +71,18 @@ public class EditNoteActivity extends AppCompatActivity {
 
         mLayout.setBackgroundColor(
                 ContextCompat.getColor(EditNoteActivity.this,
-                        NotesApp.mColorThemes.mColorMap.get(mCacheNote.getmNoteTheme())));
+                        mCacheNote.getmNoteTheme()));
 
 
-        for (final Map.Entry<Integer,Integer[]> entry: NotesApp.mColorThemes.mIdThemeToColorMap.entrySet()) {
+        for (final Map.Entry<Integer,Integer> entry: NotesApp.mColorThemes.mColorMap.entrySet()) {
             findViewById(entry.getKey()).setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                 @Override
                 public void onClick(View v) {
-                    mCacheNote.setmNoteTheme( entry.getValue()[THEME_INDEX]);
+                    mCacheNote.setmNoteTheme( entry.getValue());
                     mLayout.setBackgroundColor(ContextCompat.getColor(
                             EditNoteActivity.this,
-                            entry.getValue()[COLOR_INDEX]));
+                            entry.getValue()));
                     if(entry.getKey() == R.id.white_theme){
                         mEditText.setTextColor(ContextCompat.getColor(
                                 EditNoteActivity.this,R.color.black_textColor));
@@ -90,7 +93,7 @@ public class EditNoteActivity extends AppCompatActivity {
                                 R.color.white));
                     }
 
-                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
                 }
             });
         }

@@ -19,12 +19,12 @@ public class NotesStorage {
         this.notesDb = notesDb;
     }
     public List<Note> getNotes(){
-        Log.e(TAG,"geNotes");
+        //Log.e(TAG,"geNotes");
         List<Note> notes = new ArrayList<>(notesDb.getNotes());
         return notes;
     }
     public boolean insertNote(Note note){
-        Log.e(TAG,"insert");
+        //Log.e(TAG,"insert");
         boolean isInserted = false;
         long id = notesDb.insertNote(note);
         if(id != -1){
@@ -37,7 +37,7 @@ public class NotesStorage {
         return isInserted;
     }
     public boolean updateNote(Note note){
-        Log.e(TAG,"update");
+        //Log.e(TAG,"update");
         boolean isUpdated = false;
         int updatesCount = notesDb.updateNote(note);
         if(updatesCount > 0){
@@ -69,12 +69,12 @@ public class NotesStorage {
         return notesDb.getLastNote();
     }
     public void addListener(IcontentChangeListener listener){
-        Log.e(TAG,"addlistener");
+        //Log.e(TAG,"addlistener");
         mListenerList.add(listener);
 
     }
     public void removeListener(IcontentChangeListener listener){
-        Log.e(TAG,"removelistener");
+        //Log.e(TAG,"removelistener");
         mListenerList.remove(listener);
     }
     public interface IcontentChangeListener{

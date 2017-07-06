@@ -1,6 +1,7 @@
 package com.learning.mysample.notes;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -27,10 +28,10 @@ public class NotesAdapter extends BaseAdapter{
 
     public NotesAdapter(List<Note> notesList) {
         notes = new ArrayList<>(notesList);
-        Log.e(TAG,"msg");
+        //////Log.e(TAG,"msg");
     }
     public void setNotes(List<Note> noteList){
-        Log.e(TAG,"setNotes "+ noteList);
+        //////Log.e(TAG,"setNotes "+ noteList);
         notes = new ArrayList<>(noteList);
     }
 
@@ -46,7 +47,7 @@ public class NotesAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int position) {
-        Log.e(TAG,"getItemId " + notes.get(position).getmId());
+        //////Log.e(TAG,"getItemId " + notes.get(position).getmId());
         return notes.get(position).getmId();
     }
 
@@ -55,13 +56,14 @@ public class NotesAdapter extends BaseAdapter{
         View view = convertView;
         Note note = notes.get(position);
         if(view == null){
-            Context themedContext = new ContextThemeWrapper(parent.getContext(), note.getmNoteTheme());
+            //Context themedContext = new ContextThemeWrapper(parent.getContext(), note.getmNoteTheme());
 
-            view = LayoutInflater.from(themedContext).
+            view = LayoutInflater.from(parent.getContext()).
                     inflate(R.layout.note_item, parent,false);
 
             view.setTag(new NoteHolder(view));
         }
+        view.setBackgroundColor(ContextCompat.getColor(parent.getContext(),note.getmNoteTheme()));
 
         NoteHolder noteHolder = (NoteHolder) view.getTag();
         noteHolder.setNote(note);

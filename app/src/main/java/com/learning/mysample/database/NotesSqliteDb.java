@@ -11,6 +11,8 @@ import com.learning.mysample.Note;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.learning.mysample.database.Contract.NotesDbContract.TABLE_NAME;
+
 /**
  * Created by Диана on 30.06.2017.
  */
@@ -25,21 +27,22 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
     public NotesSqliteDb(Context context) {
 
         super(context, NAME,null, VERSION);
-        Log.e(TAG,"NoteSqliteDB");
+        //Log.e(TAG,"NoteSqliteDB");
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
 
             String createDbSql = "CREATE TABLE " +
-                    Contract.NotesDbContract.TABLE_NAME + "(" +
+                    TABLE_NAME + "(" +
                     Contract.NotesDbContract._ID + " INTEGER PRIMARY KEY AUTOINCREMENT ," +
                     Contract.NotesDbContract.DATE + " INTEGER NOT NULL, " +
                     Contract.NotesDbContract.TEXT + " TEXT, " +
                     Contract.NotesDbContract.NOTE_COLOR + " INTEGER NOT NULL " +
                     ");";
             db.execSQL(createDbSql);
-           Log.e(TAG,"onCreate "+createDbSql);
+
+           //Log.e(TAG,"onCreate "+createDbSql);
 
 
     }
@@ -54,7 +57,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         Cursor cursor = null;
         Note note = null;
         try {
-            cursor = db.query (Contract.NotesDbContract.TABLE_NAME,
+            cursor = db.query (TABLE_NAME,
                     null,
                     null,
                     null,
@@ -82,7 +85,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         database.beginTransaction();
         try{
             cursor = database.query(
-                    Contract.NotesDbContract.TABLE_NAME,
+                    TABLE_NAME,
                     null,
                     null,
                     null,
@@ -91,7 +94,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
                     null);
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
-                Log.e(TAG,ContentValFromNote.createNoteFromCursor(cursor).toString());
+                //Log.e(TAG,ContentValFromNote.createNoteFromCursor(cursor).toString());
                 noteList.add(ContentValFromNote.createNoteFromCursor(cursor));
                 cursor.moveToNext();
             }
@@ -111,14 +114,14 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         try {
             ContentValues contentValues = ContentValFromNote.createContentValuesFromNote(note);
 
-            insertedId = database.insert(Contract.NotesDbContract.TABLE_NAME, null, contentValues);
+            insertedId = database.insert(TABLE_NAME, null, contentValues);
             database.setTransactionSuccessful();
         }
         finally {
             database.endTransaction();
 
         }
-        Log.e(TAG,"id = "+ insertedId);
+        //Log.e(TAG,"id = "+ insertedId);
         return insertedId;
     }
 
@@ -129,7 +132,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         try {
             ContentValues contentValues = ContentValFromNote.createContentValuesFromNote(note);
 
-            updated = database.update(Contract.NotesDbContract.TABLE_NAME,
+            updated = database.update(TABLE_NAME,
                     contentValues,
                     Contract.NotesDbContract._ID +" = ? ",
                     new String[]{String.valueOf(note.getmId())}
@@ -147,7 +150,7 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         db.beginTransaction();
         int deletedNotes = 0;
         try {
-            deletedNotes = db.delete(Contract.NotesDbContract.TABLE_NAME,
+            deletedNotes = db.delete(TABLE_NAME,
                     Contract.NotesDbContract._ID + " = ? ",
                     new String[]{String.valueOf(note.getmId())});
             db.setTransactionSuccessful();
@@ -163,18 +166,18 @@ public class NotesSqliteDb extends SQLiteOpenHelper{
         Note note = null;
         Cursor cursor = null;
         try{
-            cursor = database.query(Contract.NotesDbContract.TABLE_NAME,
+            cursor = database.query(TABLE_NAME,
                     new String[]{Contract.NotesDbContract._ID,Contract.NotesDbContract.TEXT,Contract.NotesDbContract.DATE,Contract.NotesDbContract.NOTE_COLOR},
                     Contract.NotesDbContract._ID + " = ?",
                     new String[]{String.valueOf(id)},
                     null,
                     null,
                     null);
-            Log.e(TAG,"getNodeById id= "+ id);
+            //Log.e(TAG,"getNodeById id= "+ id);
             cursor.moveToFirst();
 
             note = ContentValFromNote.createNoteFromCursor(cursor);
-            //Log.e(TAG, "not = " + note);
+            ////Log.e(TAG, "not = " + note);
             database.setTransactionSuccessful();
         }
         finally {
